@@ -13,7 +13,7 @@ and open the template in the editor.
         <?php
         include_once './classes/Utilisateur.php';
         include_once './classes/Articles.php';
-        $utilisateur1 = new Utilisateur("nom1", "avatar", "bio utilisateur", "89");
+        $utilisateur1 = new Utilisateur("nom1","a@a.fr", "avatar", "bio utilisateur", "89",rand(0,1000));
         $article1 = new Articles("maths", "titre", "blablablabal", "12","1", "12/12/12", "nom1", "maths,blabla")
         ?>
         <form action="" method="POST">
@@ -23,7 +23,8 @@ and open the template in the editor.
         </form>
         <div>
         <?php
-        echo $utilisateur1->getNom();
+        echo "<p>".$utilisateur1->getNom()."</p>";
+        echo "<p>".$utilisateur1->getId()."</p>";
         echo $article1->makeArticle();
         ?>
         </div>

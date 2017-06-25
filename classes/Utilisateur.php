@@ -20,35 +20,61 @@ class Utilisateur {
     protected $age;
     protected $id;
             
-    function __construct($nom, $email, $avatar, $bio, $age) {
+    function __construct($nom, $email, $avatar, $bio, $age, $id) {
         $this->nom = $nom;
         $this->email = $email;
         $this->avatar = $avatar;
         $this->bio = $bio;
         $this->age = $age;
+        $this->id = $id;
     }
-    function getNom() {
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNom()
+    {
         return $this->nom;
     }
-    
-    function getEmail(){
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
         return $this->email;
     }
-    
-    function getAvatar() {
+
+    /**
+     * @return mixed
+     */
+    public function getAvatar()
+    {
         return $this->avatar;
     }
 
-    function getBio() {
+    /**
+     * @return mixed
+     */
+    public function getBio()
+    {
         return $this->bio;
     }
 
-    function getAge() {
+    /**
+     * @return mixed
+     */
+    public function getAge()
+    {
         return $this->age;
-    }
-    
-    function getId(){
-        return $this->id;
     }
 
 
