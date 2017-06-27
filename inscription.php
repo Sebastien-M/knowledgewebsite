@@ -8,6 +8,7 @@
     </head>
     <body>
         <?php
+        session_start();
         require_once 'website-parts/header.php';
         ?>
         <main>

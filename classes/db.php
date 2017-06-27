@@ -36,9 +36,10 @@ class db {
         //PUT SOME SHIT HERE
         foreach ($json as $key => $value) {
             if ($value->{"pseudo"} === $username && $value->{"password"} === md5($password)) {
-                echo "connecté";
+                return true;
             }
         }
+        return false;
     }
 
 }
