@@ -21,14 +21,17 @@ and open the template in the editor.
             <input type="password" placeholder="Mot de passe" name="password">
             <input class="connection" type="submit" value="envoyer">
         </form>
+        
         <?php
+        
         $db = new db();
         if (isset($_POST["pseudo"]) && isset($_POST["password"])) {
             if ($db->readUser(htmlspecialchars($_POST["pseudo"]), htmlspecialchars($_POST["password"])) === true) {
                 $_SESSION['connected'] = true;
+                $_SESSION['pseudo'] = htmlspecialchars($_POST["pseudo"]);
                 header("Refresh:0; url=index.php");
             } else if ($db->readUser(htmlspecialchars($_POST["pseudo"]), htmlspecialchars($_POST["password"])) === false) {
-                echo "mauvais pserudo ou mdp";
+                echo "Mauvais pseudo ou mdp";
             }
         }
         ?>

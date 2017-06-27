@@ -11,26 +11,23 @@
  *
  * @author seb
  */
-class Articles {
+class Article {
 
     protected $discipline;
     protected $titre;
     protected $contenu;
     protected $upvotes;
     protected $downvotes;
-    protected $date;
+//    protected $date;
     protected $auteur;
     protected $tags;
 
-    function __construct($discipline, $titre, $contenu, $upvotes, $downvotes, $date, $auteur, $tags) {
+    function __construct($discipline, $titre, $contenu, $auteur) {
         $this->discipline = $discipline;
         $this->titre = $titre;
         $this->contenu = $contenu;
-        $this->upvotes = $upvotes;
-        $this->downvotes = $downvotes;
-        $this->date = $date;
+//        $this->date = date("m/d/y");
         $this->auteur = $auteur;
-        $this->tags = $tags;
     }
 
     function makeArticle() {
@@ -44,5 +41,37 @@ class Articles {
         echo "<p>" . $this->upvotes . "</p>";
         echo "</div>";
     }
+    function getDiscipline() {
+        return $this->discipline;
+    }
+
+    function getTitre() {
+        return $this->titre;
+    }
+
+    function getContenu() {
+        return $this->contenu;
+    }
+
+    function getUpvotes() {
+        return $this->upvotes;
+    }
+
+    function getDownvotes() {
+        return $this->downvotes;
+    }
+
+    function getDate() {
+        return $this->date;
+    }
+
+    function getAuteur() {
+        return $this->auteur;
+    }
+
+    function getTags() {
+        return $this->tags;
+    }
+
 
 }

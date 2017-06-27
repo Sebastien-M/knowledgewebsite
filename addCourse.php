@@ -11,33 +11,31 @@ and open the template in the editor.
         <title>Ajouter un cours</title>
     </head>
     <body>
-        <?php require_once './website-parts/header.php'; ?>
-        <form style="height:80vh;"action="" method="POST">
+        <?php
+        session_start();
+        require_once './classes/db.php';
+        require_once './classes/Article.php';
+        require_once './website-parts/header.php';
+        ?>
+        <form style="height:80vh;" action="" method="POST">
             <label>Titre</label>
             <input type="text" name="titre">
             <label>Catégorie</label>
             <input type="text" name="categorie">
             <label>Cours</label>
-            <textarea style="width:100%;height:80%;" name="contenu" id="content"></textarea>
+            <textarea style="width:100%;height:80%;resize: none;" name="cours" id="content"></textarea>
             <input type="submit" value="envoyer">
         </form>
         <?php
+        if(isset($_POST['titre'])&& isset($_POST['categorie'])&& isset($_POST['cours'])){
+            $db = new db();
+            var_dump($db);
+            $course = new Article($_POST['categorie'], $_POST['titre'], $_POST['cours'], $_SESSION["pseudo"]);
+            $db->newArticle($course);
+            var_dump($course);
+            
+        }
         ?>
-    <xmp theme="united" style="display:none;">
-        # Markdown text goes in here
 
-        ## Chapter 1
-
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-        et dolore magna aliqua. 
-
-        ## Chapter 2
-
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-        culpa qui officia deserunt mollit anim id est laborum.
-    </xmp>
-    <script src="http://strapdownjs.com/v/0.2/strapdown.js"></script>
-</body>
+    </body>
 </html>

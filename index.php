@@ -16,8 +16,8 @@ and open the template in the editor.
         session_start();
         require_once './website-parts/header.php';
         include_once './classes/Utilisateur.php';
-        include_once './classes/Articles.php';
-        $article1 = new Articles("maths", "titre", "blablablabal", "12", "1", "12/12/12", "nom1", "maths,blabla");
+        include_once './classes/Article.php';
+//        $article1 = new Article("maths", "titre", "blablablabal", "12", "1", "12/12/12", "nom1", "maths,blabla");
         if(!isset($_SESSION['connected'])){
             echo "Déconnecté";
         }

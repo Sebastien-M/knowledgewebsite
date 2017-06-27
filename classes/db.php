@@ -12,6 +12,7 @@
  * @author seb
  */
 include_once 'Utilisateur.php';
+include_once 'Article.php';
 
 class db {
 
@@ -40,6 +41,17 @@ class db {
             }
         }
         return false;
+    }
+    
+    function newArticle(Article $course){
+        $inp = file_get_contents("./json/articles.json");
+        $json = json_decode($inp);
+        $json->{$course->getTitre()}["discipline"] = $course->getDiscipline();
+        $json->{$course->getTitre()}["titre"] = $course->getTitre();
+        $json->{$course->getTitre()}["contenu"] = $course->getContenu();
+        $json->{$course->getTitre()}["auteur"] = $course->getAuteur();
+        $jsonData = json_encode($json);
+        file_put_contents("./json/articles.json", $jsonData);
     }
 
 }
