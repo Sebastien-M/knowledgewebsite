@@ -1,1 +1,20 @@
-{"wxc":{"discipline":"wxc","titre":"wxc","contenu":"wdcw","auteur":"root"},"mlqdujliqsdhl":{"discipline":"lkjdslkjfldsk","titre":"mlqdujliqsdhl","contenu":"slkdjflksjdfsdf","auteur":"root"}}
+{
+  "wxc": {
+    "discipline": "wxc",
+    "titre": "wxc",
+    "contenu": "wdcw",
+    "auteur": "root"
+  },
+  "mlqdujliqsdhl": {
+    "discipline": "lkjdslkjfldsk",
+    "titre": "mlqdujliqsdhl",
+    "contenu": "slkdjflksjdfsdf",
+    "auteur": "root"
+  },
+  "Mentha canadensis": {
+    "discipline": "plantes",
+    "titre": "Mentha canadensis",
+    "contenu": "La Menthe du Canada (Mentha canadensis L.) est une esp\u00e8ce de menthe de la famille des Lamiac\u00e9es1, originaire d'Am\u00e9rique du nord et d'Asie orientale dont les formes cultiv\u00e9es r\u00e9pandues dans le monde ont re\u00e7u des noms diff\u00e9rents suivant leur origine : menthe am\u00e9ricaine, menthe du Japon, menthe (des champs) de Chine (en anglais American wild mint, cornmint, Japanese mint etc.).\r\n\r\nElle est proche de la menthe des champs Mentha arvensis originaire d'Europe mais contrairement \u00e0 celle-ci, elle est tr\u00e8s riche en menthol, un ar\u00f4me naturel utilis\u00e9 pour aromatiser les cigarettes, les boissons, pour l'hygi\u00e8ne buccale, les cosm\u00e9tiques et l'industrie pharmaceutique. Les cultivars de menthe du Japon sont tr\u00e8s cultiv\u00e9s en Asie car ils fournissent la principale source commerciale pour la production de (-)-menthol naturel2.",
+    "auteur": "root"
+  }
+}

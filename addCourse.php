@@ -32,9 +32,8 @@ and open the template in the editor.
             var_dump($db);
             $course = new Article($_POST['categorie'], $_POST['titre'], $_POST['cours'], $_SESSION["pseudo"]);
             $db->newArticle($course);
-            var_dump($course);
-            
         }
+
         ?>
 
     </body>

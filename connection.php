@@ -12,7 +12,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        session_start();
+
         require_once 'website-parts/header.php';
         require_once './classes/db.php';
         ?>
@@ -27,6 +27,7 @@ and open the template in the editor.
         $db = new db();
         if (isset($_POST["pseudo"]) && isset($_POST["password"])) {
             if ($db->readUser(htmlspecialchars($_POST["pseudo"]), htmlspecialchars($_POST["password"])) === true) {
+                session_start();
                 $_SESSION['connected'] = true;
                 $_SESSION['pseudo'] = htmlspecialchars($_POST["pseudo"]);
                 header("Refresh:0; url=index.php");

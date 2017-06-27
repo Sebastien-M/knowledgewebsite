@@ -24,7 +24,7 @@
                 <label for="">Bio</label>
                 <input type="text" name="bio">
                 <label for="">age</label>
-                <input type="number" name="age">
+                <input type="date" name="age">
                 <input type="submit" value="Envoyer">
             </form>
         </main>

@@ -34,7 +34,7 @@ class db {
     function readUser($username, $password) {
         $inp = file_get_contents("./json/users.json");
         $json = json_decode($inp);
-        //PUT SOME SHIT HERE
+        //PUT SOME SHITTY CODE HERE
         foreach ($json as $key => $value) {
             if ($value->{"pseudo"} === $username && $value->{"password"} === md5($password)) {
                 return true;
@@ -42,7 +42,7 @@ class db {
         }
         return false;
     }
-    
+
     function newArticle(Article $course){
         $inp = file_get_contents("./json/articles.json");
         $json = json_decode($inp);
@@ -52,6 +52,13 @@ class db {
         $json->{$course->getTitre()}["auteur"] = $course->getAuteur();
         $jsonData = json_encode($json);
         file_put_contents("./json/articles.json", $jsonData);
+    }
+    function readArticles(){
+        $inp = file_get_contents("./json/articles.json");
+        $json = json_decode($inp);
+        foreach($json as $key => $value){
+            echo '<br/>'.$value->{'titre'}.'<br/>';
+        }
     }
 
 }

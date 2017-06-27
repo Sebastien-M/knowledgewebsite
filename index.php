@@ -15,12 +15,15 @@ and open the template in the editor.
         <?php
         session_start();
         require_once './website-parts/header.php';
+        require_once 'classes/db.php';
         include_once './classes/Utilisateur.php';
         include_once './classes/Article.php';
-//        $article1 = new Article("maths", "titre", "blablablabal", "12", "1", "12/12/12", "nom1", "maths,blabla");
+        $db = new db();
+//      $article1 = new Article("maths", "titre", "blablablabal", "12", "1", "12/12/12", "nom1", "maths,blabla");
         if(!isset($_SESSION['connected'])){
             echo "Déconnecté";
         }
+        $db->readArticles();
         ?>
         
     </body>
