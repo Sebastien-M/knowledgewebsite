@@ -7,26 +7,21 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" href="css/header.css"/>
+        <title>Knowledge website</title>
     </head>
     <body>
         <?php
+        require_once './website-parts/header.php';
         include_once './classes/Utilisateur.php';
         include_once './classes/Articles.php';
-        $utilisateur1 = new Utilisateur("nom1","a@a.fr", "avatar", "bio utilisateur", "89",rand(0,1000));
-        $article1 = new Articles("maths", "titre", "blablablabal", "12","1", "12/12/12", "nom1", "maths,blabla")
+        $article1 = new Articles("maths", "titre", "blablablabal", "12", "1", "12/12/12", "nom1", "maths,blabla");
+        session_start();
+        if(!isset($_SESSION['connected'])){
+            echo "Déconnecté";
+        }
         ?>
-        <form action="" method="POST">
-            <input type="text" name="titre" placeholder="Titre">
-            <input type="text" name="contenu" placeholder="Contenu">
-            <input type="submit" value="Envoyer">
-        </form>
-        <div>
-        <?php
-        echo "<p>".$utilisateur1->getNom()."</p>";
-        echo "<p>".$utilisateur1->getId()."</p>";
-        echo $article1->makeArticle();
-        ?>
-        </div>
+        
     </body>
 </html>

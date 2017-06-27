@@ -11,8 +11,8 @@
  *
  * @author seb
  */
-
 class Articles {
+
     protected $discipline;
     protected $titre;
     protected $contenu;
@@ -21,7 +21,7 @@ class Articles {
     protected $date;
     protected $auteur;
     protected $tags;
-    
+
     function __construct($discipline, $titre, $contenu, $upvotes, $downvotes, $date, $auteur, $tags) {
         $this->discipline = $discipline;
         $this->titre = $titre;
@@ -32,16 +32,16 @@ class Articles {
         $this->auteur = $auteur;
         $this->tags = $tags;
     }
-    
-    function makeArticle(){
+
+    function makeArticle() {
         echo "<div class='article'>";
-        echo "<p>".$this->titre."</p>";
-        echo "<p>".$this->contenu."</p>";
-        echo "<p>".$this->auteur."</p>";
-        echo "<p>".$this->date."</p>";
-        echo "<p>".$this->discipline."</p>";
-        echo "<p>".$this->tags."</p>";
-        echo "<p>".$this->upvotes."</p>";
+        echo "<p>" . $this->titre . "</p>";
+        echo "<p>" . $this->contenu . "</p>";
+        echo "<p>" . $this->auteur . "</p>";
+        echo "<p>" . $this->date . "</p>";
+        echo "<p>" . $this->discipline . "</p>";
+        echo "<p>" . $this->tags . "</p>";
+        echo "<p>" . $this->upvotes . "</p>";
         echo "</div>";
     }
 

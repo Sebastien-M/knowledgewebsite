@@ -11,15 +11,16 @@
  *
  * @author seb
  */
-
 class Utilisateur {
+
     protected $nom;
     protected $email;
     protected $avatar;
     protected $bio;
     protected $age;
     protected $id;
-            
+    protected $password;
+    
     function __construct($nom, $email, $avatar, $bio, $age, $id) {
         $this->nom = $nom;
         $this->email = $email;
@@ -29,53 +30,57 @@ class Utilisateur {
         $this->id = $id;
     }
 
-    /**
+        /**
      * @return mixed
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
     /**
      * @return mixed
      */
-    public function getNom()
-    {
+    public function getNom() {
         return $this->nom;
     }
 
     /**
      * @return mixed
      */
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
 
     /**
      * @return mixed
      */
-    public function getAvatar()
-    {
+    public function getAvatar() {
         return $this->avatar;
     }
 
     /**
      * @return mixed
      */
-    public function getBio()
-    {
+    public function getBio() {
         return $this->bio;
     }
 
     /**
      * @return mixed
      */
-    public function getAge()
-    {
+    public function getAge() {
         return $this->age;
     }
+
+    
+    function setPassword($password) {
+        $this->password = $password;
+    }
+    
+    function getPassword() {
+        return $this->password;
+    }
+
 
 
 }
