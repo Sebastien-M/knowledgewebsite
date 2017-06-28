@@ -27,11 +27,13 @@ and open the template in the editor.
             <input type="submit" value="envoyer">
         </form>
         <?php
-        if(isset($_POST['titre'])&& isset($_POST['categorie'])&& isset($_POST['cours'])){
+        if(!empty($_POST['titre'])&& !empty($_POST['categorie'])&& !empty($_POST['cours'])){
             $db = new db();
-            var_dump($db);
             $course = new Article($_POST['categorie'], $_POST['titre'], $_POST['cours'], $_SESSION["pseudo"]);
             $db->newArticle($course);
+        }
+        else{
+            
         }
 
         ?>

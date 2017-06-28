@@ -21,13 +21,15 @@ class Article {
 //    protected $date;
     protected $auteur;
     protected $tags;
+    protected $commentaires = [];
+    protected $id;
 
     function __construct($discipline, $titre, $contenu, $auteur) {
         $this->discipline = $discipline;
         $this->titre = $titre;
         $this->contenu = $contenu;
-//        $this->date = date("m/d/y");
         $this->auteur = $auteur;
+        $this->id = rand(0, 1000000);
     }
 
     function makeArticle() {
@@ -41,6 +43,7 @@ class Article {
         echo "<p>" . $this->upvotes . "</p>";
         echo "</div>";
     }
+
     function getDiscipline() {
         return $this->discipline;
     }
@@ -71,6 +74,17 @@ class Article {
 
     function getTags() {
         return $this->tags;
+    }
+
+    function getCommentaires() {
+        return $this->commentaires;
+    }
+
+    function setCommentaires($commentaires) {
+        $this->commentaires = $commentaires;
+    }
+    function getId() {
+        return $this->id;
     }
 
 

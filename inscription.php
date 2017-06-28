@@ -37,9 +37,7 @@
             $utilisateur = new Utilisateur(htmlspecialchars($_POST["nom"]), htmlspecialchars($_POST["email"]), htmlspecialchars($_POST["avatar"]), htmlspecialchars($_POST["bio"]), htmlspecialchars($_POST["age"]), $randomId);
             $utilisateur->setPassword(md5(htmlspecialchars($_POST["password"])));
             $save->newUser($utilisateur);
-        } else {
-            echo "truc manquant";
-        }
+        } 
         ?>
     </body>
 </html>

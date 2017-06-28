@@ -8,6 +8,9 @@ and open the template in the editor.
     Author     : seb
 */
 
+body{
+    /*background-color: gray;*/
+}
 main{
     margin-top: 5%;
 }
