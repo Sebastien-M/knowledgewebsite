@@ -137,7 +137,7 @@ class db {
      *
      * creates a new comment
      *
-     * @param (Class) (Utilisateur) Utilisateur Class
+     * @param (Class) (Commentaire) Commentaire Class
      * @return (type) (name)
      * 
      */
@@ -153,6 +153,15 @@ class db {
         file_put_contents("../json/commentaires.json", $jsonData);
     }
 
+    /**
+     * readComments
+     *
+     * list all comments
+     *
+     * @param (str) (ID) id number(same as article id)
+     * @return (str) (commentaire)
+     * 
+     */
     function readComments($id) {
         $inp = file_get_contents("../json/commentaires.json");
         $json = json_decode($inp);
