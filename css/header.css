@@ -11,6 +11,10 @@ html,body{
     margin: 0;
     padding: 0;
 }
+.titre{
+    text-decoration: none;
+    color:white;
+}
 .navTitle{
     margin:0;
     color:white;

@@ -100,18 +100,21 @@ class db {
     function newComment(Commentaire $comment){
         $inp = file_get_contents("../json/commentaires.json");
         $json = json_decode($inp);
-        $json->{$comment->getAuteur()."#".$comment->getId()}["id"] = $comment->getId();
-        $json->{$comment->getAuteur()."#".$comment->getId()}["auteur"] = $comment->getAuteur();
-        $json->{$comment->getAuteur()."#".$comment->getId()}["commentaire"] = $comment->getCommentaire();
+        $rand = rand(0, 1000000000);
+        $json->{$comment->getAuteur()."#".$rand}["id"] = $comment->getId();
+        $json->{$comment->getAuteur()."#".$rand}["auteur"] = $comment->getAuteur();
+        $json->{$comment->getAuteur()."#".$rand}["commentaire"] = $comment->getCommentaire();
+        $json->{$comment->getAuteur()."#".$rand}["date"] = $comment->getDate();
         $jsonData = json_encode($json);
         file_put_contents("../json/commentaires.json", $jsonData);
     }
     function readComments($id){
         $inp = file_get_contents("../json/commentaires.json");
         $json = json_decode($inp);
+        echo "<p>Commentaires : </p>";
         foreach ($json as $key => $value) {
-            if($value->{'commentaire'} === $id){
-                echo $value->{'commentaire'};
+            if($value->{'id'} === $id){
+                echo $value->{'commentaire'}."<br/>".$value->{'date'}."<br/>";
             }
         }
     }
