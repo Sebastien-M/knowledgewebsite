@@ -17,8 +17,16 @@ include_once 'Commentaire.php';
 
 class db {
 
+    /**
+     * newUser
+     *
+     * creates a new user
+     *
+     * @param (Class) (Utilisateur) Utilisateur Class
+     * @return (type) (name)
+     * 
+     */
     function newUser(Utilisateur $user) {
-
         $inp = file_get_contents("./json/users.json");
         $json = json_decode($inp);
         $json->{$user->getNom()}["email"] = $user->getEmail();
@@ -31,11 +39,18 @@ class db {
         $jsonData = json_encode($json);
         file_put_contents("./json/users.json", $jsonData);
     }
-
+    /**
+     * readUser
+     *
+     * check if good username and password written
+     *
+     * @param (str,str) (username,password) username,password
+     * @return (bool) (true/false)
+     * 
+     */
     function readUser($username, $password) {
         $inp = file_get_contents("./json/users.json");
         $json = json_decode($inp);
-        //PUT SOME SHITTY CODE HERE
         foreach ($json as $key => $value) {
             if ($value->{"pseudo"} === $username && $value->{"password"} === md5($password)) {
                 return true;
@@ -43,7 +58,15 @@ class db {
         }
         return false;
     }
-
+    
+    /**
+     * newArticle
+     *
+     * creates a new article
+     *
+     * @param (Class) (Article) Article class
+     *
+     */
     function newArticle(Article $course) {
         $inp = file_get_contents("./json/articles.json");
         $json = json_decode($inp);
@@ -56,6 +79,15 @@ class db {
         file_put_contents("./json/articles.json", $jsonData);
     }
 
+    /**
+     * readArticle
+     *
+     * readArticles
+     *
+     * 
+     * @return (str) (articles) returns a form with articles inside
+     * 
+     */
     function readArticles() {
         $inp = file_get_contents("./json/articles.json");
         $json = json_decode($inp);
@@ -66,7 +98,16 @@ class db {
             echo "<form/>";
         }
     }
-
+    
+    /**
+     * readSingleArticle
+     *
+     * Opens a single article
+     *
+     * @param (str,str) (articlename,argument)
+     * @return (array) (contents of article)
+     * 
+     */
     function readSingleArticle($nameArticle, $arg) {
         $inp = file_get_contents("../json/articles.json");
         $json = json_decode($inp);
@@ -75,47 +116,52 @@ class db {
             $json->{$nameArticle}->{"contenu"},
             $json->{$nameArticle}->{"auteur"},
             $json->{$nameArticle}->{"id"}];
-            
-        if($arg === "discipline"){
+
+        if ($arg === "discipline") {
             return $contents[0];
-        }
-        else if($arg === "titre"){
-            return "#".$contents[1];
-        }
-        else if($arg === "contenu"){
+        } else if ($arg === "titre") {
+            return "#" . $contents[1];
+        } else if ($arg === "contenu") {
             return $contents[2];
-        }
-        else if($arg === "auteur"){
+        } else if ($arg === "auteur") {
             return $contents[3];
-        }
-        else if($arg === "all"){
+        } else if ($arg === "all") {
             return $contents;
-        }
-        else if ($arg === "id"){
+        } else if ($arg === "id") {
             return $contents[4];
         }
-        
     }
     
-    function newComment(Commentaire $comment){
+    /**
+     * newComment
+     *
+     * creates a new comment
+     *
+     * @param (Class) (Utilisateur) Utilisateur Class
+     * @return (type) (name)
+     * 
+     */
+    function newComment(Commentaire $comment) {
         $inp = file_get_contents("../json/commentaires.json");
         $json = json_decode($inp);
         $rand = rand(0, 1000000000);
-        $json->{$comment->getAuteur()."#".$rand}["id"] = $comment->getId();
-        $json->{$comment->getAuteur()."#".$rand}["auteur"] = $comment->getAuteur();
-        $json->{$comment->getAuteur()."#".$rand}["commentaire"] = $comment->getCommentaire();
-        $json->{$comment->getAuteur()."#".$rand}["date"] = $comment->getDate();
+        $json->{$comment->getAuteur() . "#" . $rand}["id"] = $comment->getId();
+        $json->{$comment->getAuteur() . "#" . $rand}["auteur"] = $comment->getAuteur();
+        $json->{$comment->getAuteur() . "#" . $rand}["commentaire"] = $comment->getCommentaire();
+        $json->{$comment->getAuteur() . "#" . $rand}["date"] = $comment->getDate();
         $jsonData = json_encode($json);
         file_put_contents("../json/commentaires.json", $jsonData);
     }
-    function readComments($id){
+
+    function readComments($id) {
         $inp = file_get_contents("../json/commentaires.json");
         $json = json_decode($inp);
         echo "<p>Commentaires : </p>";
         foreach ($json as $key => $value) {
-            if($value->{'id'} === $id){
-                echo $value->{'commentaire'}."<br/>".$value->{'date'}."<br/>";
+            if ($value->{'id'} === $id) {
+                echo $value->{'commentaire'} . "<br/>" . $value->{'date'} . "<br/>";
             }
         }
     }
+
 }
