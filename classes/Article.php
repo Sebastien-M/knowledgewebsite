@@ -16,8 +16,8 @@ class Article {
     protected $discipline;
     protected $titre;
     protected $contenu;
-    protected $upvotes;
-    protected $downvotes;
+    protected $upvotes = [];
+    protected $downvotes = [];
 //    protected $date;
     protected $auteur;
     protected $tags;
@@ -56,13 +56,6 @@ class Article {
         return $this->contenu;
     }
 
-    function getUpvotes() {
-        return $this->upvotes;
-    }
-
-    function getDownvotes() {
-        return $this->downvotes;
-    }
 
     function getDate() {
         return $this->date;
@@ -86,6 +79,24 @@ class Article {
     function getId() {
         return $this->id;
     }
+
+    function getUpvotes() {
+        return $this->upvotes;
+    }
+
+    function getDownvotes() {
+        return $this->downvotes;
+    }
+
+    function setUpvotes($upvotes) {
+        $this->upvotes = $upvotes;
+    }
+
+    function setDownvotes($downvotes) {
+        $this->downvotes = $downvotes;
+    }
+
+
 
 
 }

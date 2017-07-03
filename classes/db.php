@@ -23,7 +23,7 @@ class db {
      * creates a new user
      *
      * @param (Class) (Utilisateur) Utilisateur Class
-     * @return (type) (name)
+     * @return (none) (none)
      * 
      */
     function newUser(Utilisateur $user) {
@@ -39,6 +39,7 @@ class db {
         $jsonData = json_encode($json);
         file_put_contents("./json/users.json", $jsonData);
     }
+
     /**
      * readUser
      *
@@ -58,7 +59,7 @@ class db {
         }
         return false;
     }
-    
+
     /**
      * newArticle
      *
@@ -75,6 +76,8 @@ class db {
         $json->{$course->getTitre()}["contenu"] = $course->getContenu();
         $json->{$course->getTitre()}["auteur"] = $course->getAuteur();
         $json->{$course->getTitre()}["id"] = $course->getId();
+        $json->{$course->getTitre()}["upvotes"] = $course->getUpvotes();
+        $json->{$course->getTitre()}["downvotes"] = $course->getDownvotes();
         $jsonData = json_encode($json);
         file_put_contents("./json/articles.json", $jsonData);
     }
@@ -84,21 +87,19 @@ class db {
      *
      * readArticles
      *
-     * 
-     * @return (str) (articles) returns a form with articles inside
+     * @return (array) (articles) returns a form with articles inside
      * 
      */
     function readArticles() {
         $inp = file_get_contents("./json/articles.json");
         $json = json_decode($inp);
-        $i = 0;
+        $articles = [];
         foreach ($json as $key => $value) {
-            echo "<form action='website-parts/course.php' method='POST'>";
-            echo "<input type='submit' name='" . $i . "' value='" . $value->{'titre'} . "'";
-            echo "<form/>";
+            array_push($articles, $value);
         }
+        return $articles;
     }
-    
+
     /**
      * readSingleArticle
      *
@@ -131,14 +132,14 @@ class db {
             return $contents[4];
         }
     }
-    
+
     /**
      * newComment
      *
      * creates a new comment
      *
      * @param (Class) (Commentaire) Commentaire Class
-     * @return (type) (name)
+     * @return (none) (none)
      * 
      */
     function newComment(Commentaire $comment) {
@@ -149,6 +150,8 @@ class db {
         $json->{$comment->getAuteur() . "#" . $rand}["auteur"] = $comment->getAuteur();
         $json->{$comment->getAuteur() . "#" . $rand}["commentaire"] = $comment->getCommentaire();
         $json->{$comment->getAuteur() . "#" . $rand}["date"] = $comment->getDate();
+        $json->{$comment->getAuteur() . "#" . $rand}["upvotes"] = $comment->getUpvotes();
+        $json->{$comment->getAuteur() . "#" . $rand}["downvotes"] = $comment->getDownvotes();
         $jsonData = json_encode($json);
         file_put_contents("../json/commentaires.json", $jsonData);
     }
@@ -159,18 +162,46 @@ class db {
      * list all comments
      *
      * @param (str) (ID) id number(same as article id)
-     * @return (str) (commentaire)
+     * @return (arr) (commentaire and form)
      * 
      */
-    function readComments($id) {
+    function readComments(String $id): Array {
         $inp = file_get_contents("../json/commentaires.json");
         $json = json_decode($inp);
-        echo "<p>Commentaires : </p>";
+        $values = [];
         foreach ($json as $key => $value) {
-            if ($value->{'id'} === $id) {
-                echo $value->{'commentaire'} . "<br/>" . $value->{'date'} . "<br/>";
-            }
+            array_push($values, $value);
         }
+        return $values;
+    }
+    /**
+     * upvotes
+     *
+     * adds upvotes
+     *
+     * @param (Class) (Commentaire) Commentaire class
+     * @return (none) (none)
+     * 
+     */
+    function upvotes(Article $article,$upvote) {
+        $votes = $article->setUpvotes();
+        array_push($votes, $upvote);
+    }
+    /**
+     * downvotes
+     *
+     * adds downvotes
+     *
+     * @param (Class) (Commentaire) Commentaire class
+     * @return (none) (none)
+     * 
+     */
+    function downvotes(Article $article) {
+        $currentup = $comment->getUpvotes();
+        $currentup += 1;
+        $inp = file_get_contents("../json/commentaires.json");
+        $json = json_decode($inp);
+        $json->{$comment->getAuteur() . "#" . $comment->getId()}["upvotes"] = $currentup;
     }
 
 }

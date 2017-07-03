@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE  html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -9,27 +9,29 @@
         session_start();
         
         //au clic sur la page article choisi = article cliqué
-        if (!isset($_POST['commentaire'])) {
-            $_SESSION['articleChoisi'] = $_POST[0];
+        if (!isset($_POST['article'])) {
+            $_SESSION['articleChoisi'] = $_SESSION['articleChoisi'];
+        } else if (!isset($_POST['commentaire'])) {
+            $_SESSION['articleChoisi'] = $_POST['article'];
         }
         ?>
-        <title><?php
-        //useless?
-            if ($_SESSION['articleChoisi']) {
-                echo $db->readSingleArticle($_SESSION['articleChoisi'], "discipline");
-            } 
-            ?></title>
+        <title>
+            <?php
+            //Header
+            echo $db->readSingleArticle($_SESSION['articleChoisi'], "discipline");
+            ?>
+        </title>
     </head>
     <body>
     <xmp theme="bootswatch" style="display:none;">
 
+
 <?php
-        //useless2?
-        if ($_SESSION['articleChoisi']) {
-            echo $db->readSingleArticle($_SESSION['articleChoisi'], "titre") . "\n";
-            echo $db->readSingleArticle($_SESSION['articleChoisi'], "contenu") . "\n";
-        } 
+//Markdown
+        echo $db->readSingleArticle($_SESSION['articleChoisi'], "titre") . "\n";
+        echo $db->readSingleArticle($_SESSION['articleChoisi'], "contenu") . "\n";
 ?>
+
     </xmp>
     <a href="../index.php">Retour au menu</a>
     <script src="http://strapdownjs.com/v/0.2/strapdown.js"></script>
@@ -43,18 +45,40 @@
         echo "</form>";
     }
     //si connecté et commentaire rempli
-    if (!empty($_POST['commentaire'])){
-        $comment = new Commentaire($db->readSingleArticle($_SESSION['articleChoisi'],"id"), $_SESSION["pseudo"], $_POST['commentaire']);
+    if (!empty($_POST['commentaire'])) {
+        $comment = new Commentaire($db->readSingleArticle($_SESSION['articleChoisi'], "id"), $_SESSION["pseudo"], htmlspecialchars($_POST['commentaire']));
         $db->newComment($comment);
     }
     // si non connecté pas de commentaires possible
-    else if( !isset($_SESSION['connected'])){}
+    else if (!isset($_SESSION['connected'])) {
+        
+    }
     //si connecté et commentaire vide
-    else if (isset($_POST['commentaire']) && $_POST['commentaire'] === ""){
+    else if (isset($_POST['commentaire']) && $_POST['commentaire'] === "") {
         echo "Commentaire vide";
     }
-    //lire commentaires
-    $db->readComments($db->readSingleArticle($_SESSION['articleChoisi'], "id"));
+    //lire commentaires avec meme id que l'article
+    echo "<p>Commentaires : </p>";
+    $commentaires = $db->readComments($db->readSingleArticle($_SESSION['articleChoisi'], "id"));
+    foreach ($commentaires as $value) {
+        //Vérifie si l'id du commentaire est le meme que l'article
+        if ($value->{'id'} === $db->readSingleArticle($_SESSION['articleChoisi'], "id")) {
+            echo "<br/><br/>" . $value->{'commentaire'} . "<br/>" . $value->{'date'};
+            //Si un utilisateur est authentifié
+            if (isset($_SESSION['connected'])) {
+                //L'auteur peut supprimer ses commentairess
+                if ($value->{'auteur'} === $_SESSION['pseudo']) {
+                    echo "<form action='' method='POST'>" .
+                    "<input type='submit' value='supprimer' name='supprimer'>" .
+                    "</form>";
+                }
+            }
+        }
+    }
+    echo "<form action='' method='POST'>" .
+    "<input type='submit' value='upvote' name='upvote'>" .
+    "<input type='submit' value='downvote' name='downvote'>" .
+    "</form>";
     ?>
 
 </body>

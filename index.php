@@ -22,7 +22,13 @@ and open the template in the editor.
         if(!isset($_SESSION['connected'])){
             echo "Déconnecté";
         }
-        $db->readArticles();
+        $articles = $db->readArticles();
+        $i = 0;
+        foreach ($articles as $key => $value) {
+            echo "<form action='website-parts/course.php' method='POST'>";
+            echo "<input type='submit' name='article' value='" . $value->{'titre'} . "'";
+            echo "<form/>";
+        }
         ?>
         
     </body>

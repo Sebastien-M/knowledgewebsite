@@ -12,6 +12,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php
+        if(isset($_SESSION['connected'])){
         session_start();
         require_once './classes/db.php';
         require_once './classes/Article.php';
@@ -35,7 +36,11 @@ and open the template in the editor.
         else{
             
         }
-
+        }
+        else{
+            echo '<p>Vous devez être connecté pour ajouter un cours</p>';
+            echo "<a href='index.php'>Retour</a>";
+        }
         ?>
 
     </body>

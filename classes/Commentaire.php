@@ -12,11 +12,12 @@
  * @author seb
  */
 class Commentaire {
+
     protected $id;
     protected $auteur;
     protected $commentaire;
     protected $date;
-    
+
     function __construct($id, $auteur, $commentaire) {
         $this->id = $id;
         $this->auteur = $auteur;
