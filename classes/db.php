@@ -145,13 +145,14 @@ class db {
     function newComment(Commentaire $comment) {
         $inp = file_get_contents("../json/commentaires.json");
         $json = json_decode($inp);
-        $rand = rand(0, 1000000000);
+        $rand = $comment->getId2();
         $json->{$comment->getAuteur() . "#" . $rand}["id"] = $comment->getId();
         $json->{$comment->getAuteur() . "#" . $rand}["auteur"] = $comment->getAuteur();
         $json->{$comment->getAuteur() . "#" . $rand}["commentaire"] = $comment->getCommentaire();
         $json->{$comment->getAuteur() . "#" . $rand}["date"] = $comment->getDate();
-        $json->{$comment->getAuteur() . "#" . $rand}["upvotes"] = $comment->getUpvotes();
-        $json->{$comment->getAuteur() . "#" . $rand}["downvotes"] = $comment->getDownvotes();
+        $json->{$comment->getAuteur() . "#" . $rand}["id2"] = $comment->getId2();
+        //$json->{$comment->getAuteur() . "#" . $rand}["upvotes"] = $comment->getUpvotes();
+        //$json->{$comment->getAuteur() . "#" . $rand}["downvotes"] = $comment->getDownvotes();
         $jsonData = json_encode($json);
         file_put_contents("../json/commentaires.json", $jsonData);
     }
@@ -165,15 +166,35 @@ class db {
      * @return (arr) (commentaire and form)
      * 
      */
-    function readComments(String $id): Array {
+    function readComments(String $id)/*: Array*/ {
         $inp = file_get_contents("../json/commentaires.json");
         $json = json_decode($inp);
         $values = [];
-        foreach ($json as $key => $value) {
-            array_push($values, $value);
+        if (!empty($json)) {
+            foreach ($json as $key => $value) {
+                array_push($values, $value);
+            }
+            return $values;
         }
-        return $values;
+        
     }
+    
+    /**
+     * deleteComment
+     *
+     * Deletes a comment
+     *
+     * @param (Object) ($value) Commentaire object from readComments()
+     * @return (none) (none)
+     * 
+     */
+    function deleteComment($value) {
+        $inp = file_get_contents("../json/commentaires.json");
+        $json = json_decode($inp);
+        echo $value->{'auteur'}."#".$value->{'id2'};
+        unset($json->{$value->{'auteur'}."#".$value->{'id2'}});
+    }
+
     /**
      * upvotes
      *
@@ -183,10 +204,11 @@ class db {
      * @return (none) (none)
      * 
      */
-    function upvotes(Article $article,$upvote) {
+    function upvotes(Article $article, $upvote) {
         $votes = $article->setUpvotes();
         array_push($votes, $upvote);
     }
+
     /**
      * downvotes
      *

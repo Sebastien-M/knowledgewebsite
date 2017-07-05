@@ -1,0 +1,29 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 4, 2017, 2:07:55 PM
+    Author     : seb
+*/
+
+.coursButton{
+    border:none;
+    font-family: 'Roboto', sans-serif;
+    background-color: white;
+    font-size: 20px;
+    transition:0.5s;
+}
+.coursButton:hover{
+    background-color:black;
+    color:white;
+}
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.coursForm{
+    width:90%;
+}

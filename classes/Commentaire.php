@@ -17,12 +17,14 @@ class Commentaire {
     protected $auteur;
     protected $commentaire;
     protected $date;
+    protected $id2;
 
     function __construct($id, $auteur, $commentaire) {
         $this->id = $id;
         $this->auteur = $auteur;
         $this->commentaire = $commentaire;
         $this->date = date("m/d/y");
+        $this->id2 = rand(0, 10000000);
     }
 
     function getId() {
@@ -39,6 +41,10 @@ class Commentaire {
 
     function getDate() {
         return $this->date;
+    }
+
+    function getId2() {
+        return $this->id2;
     }
 
 

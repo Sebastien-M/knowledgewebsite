@@ -7,7 +7,7 @@
         require_once '../classes/db.php';
         $db = new db();
         session_start();
-        
+
         //au clic sur la page article choisi = article cliqué
         if (!isset($_POST['article'])) {
             $_SESSION['articleChoisi'] = $_SESSION['articleChoisi'];
@@ -69,9 +69,16 @@
                 //L'auteur peut supprimer ses commentairess
                 if ($value->{'auteur'} === $_SESSION['pseudo']) {
                     echo "<form action='' method='POST'>" .
+                    "<input type='hidden' name='deletecompseudo' value='" . $_SESSION['pseudo'] . "'>" .
+                    "<input type='hidden' name='deletecomcom' value='" . $value->{'commentaire'} . "'>" .
                     "<input type='submit' value='supprimer' name='supprimer'>" .
                     "</form>";
                 }
+            }
+        }
+        if (isset($_POST['deletecompseudo']) && isset($_POST['deletecomcom'])) {
+            if ($_POST['deletecompseudo'] === $value->{'auteur'} && $_POST['deletecomcom'] === $value->{'commentaire'}) {
+                $db->deleteComment($value);
             }
         }
     }
