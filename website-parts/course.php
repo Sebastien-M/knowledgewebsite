@@ -25,7 +25,6 @@
     <body>
     <xmp theme="bootswatch" style="display:none;">
 
-
 <?php
 //Markdown
         echo $db->readSingleArticle($_SESSION['articleChoisi'], "titre") . "\n";
@@ -35,6 +34,7 @@
     </xmp>
     <a href="../index.php">Retour au menu</a>
     <script src="http://strapdownjs.com/v/0.2/strapdown.js"></script>
+
     <?php
     // si connecté afficher form pour commentaires
     if (isset($_SESSION['connected'])) {
@@ -57,8 +57,13 @@
     else if (isset($_POST['commentaire']) && $_POST['commentaire'] === "") {
         echo "Commentaire vide";
     }
-    //lire commentaires avec meme id que l'article
     echo "<p>Commentaires : </p>";
+    //Supprimer commentaire si post delete
+    if (isset($_POST['deleteid2'])) {
+            $db->deleteComment($_SESSION['pseudo'],$_POST['deleteid2']);
+    }
+    else{}
+    //lire commentaires avec meme id que l'article
     $commentaires = $db->readComments($db->readSingleArticle($_SESSION['articleChoisi'], "id"));
     foreach ($commentaires as $value) {
         //Vérifie si l'id du commentaire est le meme que l'article
@@ -69,16 +74,10 @@
                 //L'auteur peut supprimer ses commentairess
                 if ($value->{'auteur'} === $_SESSION['pseudo']) {
                     echo "<form action='' method='POST'>" .
-                    "<input type='hidden' name='deletecompseudo' value='" . $_SESSION['pseudo'] . "'>" .
-                    "<input type='hidden' name='deletecomcom' value='" . $value->{'commentaire'} . "'>" .
+                    "<input type='hidden' name='deleteid2' value='" . $value->{'id2'} . "'>" .
                     "<input type='submit' value='supprimer' name='supprimer'>" .
                     "</form>";
                 }
-            }
-        }
-        if (isset($_POST['deletecompseudo']) && isset($_POST['deletecomcom'])) {
-            if ($_POST['deletecompseudo'] === $value->{'auteur'} && $_POST['deletecomcom'] === $value->{'commentaire'}) {
-                $db->deleteComment($value);
             }
         }
     }

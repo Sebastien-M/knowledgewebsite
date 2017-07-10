@@ -43,5 +43,59 @@
         "bio": "aaa",
         "id": 350490,
         "password": "47bce5c74f589f4867dbd57e9ca9f808"
+    },
+    "louis": {
+        "email": "larod@simplon.co",
+        "pseudo": "louis",
+        "age": "123",
+        "avatar": "index.html",
+        "bio": "lalala",
+        "id": 193376,
+        "password": "777cadc280bb23ebea268ded98338c39"
+    },
+    "test3": {
+        "email": "test3@gmail.lel",
+        "pseudo": "test3",
+        "age": "12",
+        "avatar": "",
+        "bio": "",
+        "id": 666073,
+        "password": "47bce5c74f589f4867dbd57e9ca9f808"
+    },
+    "moid": {
+        "email": "mqsjdfsdf@mdsf",
+        "pseudo": "moid",
+        "age": "123",
+        "avatar": "",
+        "bio": "",
+        "id": 417728,
+        "password": "47bce5c74f589f4867dbd57e9ca9f808"
+    },
+    "qsd": {
+        "email": "qdf@qsd",
+        "pseudo": "qsd",
+        "age": "123",
+        "avatar": "",
+        "bio": "",
+        "id": 808726,
+        "password": "47bce5c74f589f4867dbd57e9ca9f808"
+    },
+    "lkj": {
+        "email": "lkj@i",
+        "pseudo": "lkj",
+        "age": "123",
+        "avatar": "",
+        "bio": "",
+        "id": 843868,
+        "password": "48e2e79fec9bc01d9a00e0a8fa68b289"
+    },
+    "zjsfsfd": {
+        "email": "sdlkfjsdf@sdfsf",
+        "pseudo": "zjsfsfd",
+        "age": "2017-03-15",
+        "avatar": "",
+        "bio": "",
+        "id": 455861,
+        "password": "053b93d75d2eedb688fb43705d573cc6"
     }
 }

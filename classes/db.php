@@ -188,11 +188,12 @@ class db {
      * @return (none) (none)
      * 
      */
-    function deleteComment($value) {
+    function deleteComment($auteur, $id) {
         $inp = file_get_contents("../json/commentaires.json");
         $json = json_decode($inp);
-        echo $value->{'auteur'}."#".$value->{'id2'};
-        unset($json->{$value->{'auteur'}."#".$value->{'id2'}});
+        unset($json->{$auteur."#".$id});
+        file_put_contents('../json/commentaires.json',json_encode($json));
+        unset($json);
     }
 
     /**
