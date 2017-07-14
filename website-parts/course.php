@@ -9,10 +9,10 @@
         session_start();
 
         //au clic sur la page article choisi = article cliqué
-        if (!isset($_POST['article'])) {
+        if (!isset($_GET['article'])) {
             $_SESSION['articleChoisi'] = $_SESSION['articleChoisi'];
-        } else if (!isset($_POST['commentaire'])) {
-            $_SESSION['articleChoisi'] = $_POST['article'];
+        } else if (!isset($_GET['commentaire'])) {
+            $_SESSION['articleChoisi'] = $_GET['article'];
         }
         ?>
         <title>
@@ -81,10 +81,10 @@
             }
         }
     }
-    echo "<form action='' method='POST'>" .
-    "<input type='submit' value='upvote' name='upvote'>" .
-    "<input type='submit' value='downvote' name='downvote'>" .
-    "</form>";
+//    echo "<form action='' method='POST'>" .
+//    "<input type='submit' value='upvote' name='upvote'>" .
+//    "<input type='submit' value='downvote' name='downvote'>" .
+//    "</form>";
     ?>
 
 </body>

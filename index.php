@@ -32,9 +32,7 @@ and open the template in the editor.
             $articles = $db->readArticles();
             $i = 0;
             foreach ($articles as $key => $value) {
-                echo "<form class='coursForm' action='website-parts/course.php' method='POST'>";
-                echo "<input class='coursButton' type='submit' name='article' value='" . $value->{'titre'} . "'style='width:100%'>";
-                echo "</form>";
+                echo "<a href='website-parts/course.php?article=".$value->{'titre'}."'>".$value->{'titre'}."</a>";
             }
             ?>
         </main>
