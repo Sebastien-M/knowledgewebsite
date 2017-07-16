@@ -166,7 +166,7 @@ class db {
      * @return (arr) (commentaire and form)
      * 
      */
-    function readComments(String $id)/*: Array*/ {
+    function readComments( $id)/*: Array*/ {
         $inp = file_get_contents("../json/commentaires.json");
         $json = json_decode($inp);
         $values = [];
