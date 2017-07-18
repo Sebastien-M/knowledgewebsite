@@ -48,18 +48,19 @@
         <?php
         include_once 'classes/Utilisateur.php';
         include_once 'classes/db.php';
-        $save = new db();
-        $randomId = rand(0, 1000000);
+        $db = new db();
 
 
         if (!empty($_POST["nom"]) || !empty($_POST["email"]) || !empty($_POST["password"]) || !empty($_POST["age"])) {
-            $utilisateur = new Utilisateur(htmlspecialchars($_POST["nom"]), htmlspecialchars($_POST["email"]), htmlspecialchars($_POST["avatar"]), htmlspecialchars($_POST["bio"]), htmlspecialchars($_POST["age"]), $randomId);
-            $utilisateur->setPassword(md5(htmlspecialchars($_POST["password"])));
-            $save->newUser($utilisateur);
+            $utilisateur = new Utilisateur(htmlspecialchars($_POST["nom"]), htmlspecialchars($_POST["email"]), htmlspecialchars($_POST["avatar"]), htmlspecialchars($_POST["bio"]), htmlspecialchars($_POST["age"]));
+            $utilisateur->setPassword(password_hash($_POST["password"],PASSWORD_BCRYPT));
+            $db->new_user($utilisateur);
             session_start();
+            $_SESSION['user'] = $utilisateur;
             $_SESSION['connected'] = true;
             $_SESSION['pseudo'] = htmlspecialchars($_POST["nom"]);
-            header("Refresh:0; url=index.php");
+            //header("Refresh:0; url=index.php");
+            echo $db->display();
         } else if (isset($_POST["nom"])) {
             if (empty($_POST["nom"]) || empty($_POST["email"]) || empty($_POST["password"]) || empty($_POST["age"])) {
                 echo "<p>Formulaire incomplet</p>";

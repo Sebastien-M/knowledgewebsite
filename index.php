@@ -35,10 +35,10 @@ and open the template in the editor.
             //Afficher cours
             foreach ($articles as $key => $value) {
                 echo "<div class = 'cours'>";
-                echo "<h3 id='titre'>".ucfirst($value->{'titre'})."</h3>";
-                echo "<p id='discipline'>".ucfirst($value->{'discipline'})."</p>";
-                echo "<p id='discipline'>Ecrit par : ".ucfirst($value->{'auteur'})."</p>";
-                echo "<a href='website-parts/course.php?article=".$value->{'titre'}."'><button>Lire le cours</button></a>";
+                echo "<h3 id='titre'>".ucfirst($value['titre'])."</h3>";
+                echo "<p id='discipline'>".ucfirst($value['discipline'])."</p>";
+                echo "<p id='discipline'>Ecrit par : ".ucfirst($value['auteur'])."</p>";
+                echo "<a href='website-parts/course.php?article=".$value['titre']."'><button>Lire le cours</button></a>";
                 echo "</div>";
             }
             ?>

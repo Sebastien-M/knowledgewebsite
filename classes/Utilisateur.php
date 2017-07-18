@@ -21,7 +21,7 @@ class Utilisateur {
     protected $id;
     protected $password;
     
-    function __construct($nom, $email, $avatar, $bio, $age, $id) {
+    function __construct($nom, $email, $avatar, $bio, $age, $id = NULL) {
         $this->nom = $nom;
         $this->email = $email;
         $this->avatar = $avatar;

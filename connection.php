@@ -36,12 +36,12 @@ and open the template in the editor.
         <?php
         $db = new db();
         if (isset($_POST["pseudo"]) && isset($_POST["password"])) {
-            if ($db->readUser(htmlspecialchars($_POST["pseudo"]), htmlspecialchars($_POST["password"])) === true) {
+            if ($db->connect($_POST['pseudo'],$_POST["password"]) == TRUE) {
                 session_start();
                 $_SESSION['connected'] = true;
                 $_SESSION['pseudo'] = htmlspecialchars($_POST["pseudo"]);
                 header("Refresh:0; url=index.php");
-            } else if ($db->readUser(htmlspecialchars($_POST["pseudo"]), htmlspecialchars($_POST["password"])) === false) {
+            } else {
                 echo "Mauvais pseudo ou mdp";
             }
         }
