@@ -7,7 +7,8 @@ CREATE TABLE users (id INT PRIMARY KEY AUTO_INCREMENT,
     age DATE,
     avatar VARCHAR(500),
     bio VARCHAR(500),
-    password VARCHAR (40)
+    password VARCHAR (40),
+    regdate DATE
 );
 
 CREATE TABLE articles (
