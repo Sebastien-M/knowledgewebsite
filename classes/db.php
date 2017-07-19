@@ -7,7 +7,7 @@
  */
 
 /**
- * Description of db
+ * Class managing all database usages
  *
  * @author seb
  */
@@ -29,7 +29,7 @@ class db {
      *
      * creates a new user
      *
-     * @param (Class) (Utilisateur) User class
+     * @param Class Utilisateur User class
      * @return (none) (none)
      * 
      */
@@ -57,7 +57,7 @@ class db {
      * creates a new article
      *
      * @param (Class) (Article) Article Class
-     * @return (none) (none)
+     * @return (none) 
      * 
      */
     function newArticle(Article $cours) {
@@ -85,8 +85,8 @@ class db {
      *
      * check if pseudo and password matches with an existing one
      *
-     * @param (str,str) (pseudo,password) 
-     * @return (Bool) (none)
+     * @param (str,str) $user,$password pseudo and password sent inside inputs
+     * @return (Bool) (True if connection is okay)
      * 
      */
     function connect($user, $password) {
@@ -108,8 +108,8 @@ class db {
      *
      * display articles
      *
-     * @param (none) (none)
-     * @return (array) (none)
+     * @param none
+     * @return (associative array) (Associative array containing discipline, titre, contenu, auteur and creation date)
      * 
      */
     function readArticles() {
@@ -134,8 +134,8 @@ class db {
      *
      * Display content of an article
      *
-     * @param (str) (Chosen) Title of article
-     * @return (array) (none)
+     * @param str $chosen Title of article
+     * @return (array) (Array containing discipline, titre, contenu, auteur and creation date)
      * 
      */
     function readSingleArticle($chosen){
@@ -146,6 +146,7 @@ class db {
 //            print_r($this->dbh->errorInfo());
 //        }
         while ($row = $query->fetch()) {
+            $arr['id'] = $row['id'];
             $arr['discipline'] = $row['discipline'];
             $arr['titre'] = $row['titre'];
             $arr['contenu'] = $row['contenu'];
