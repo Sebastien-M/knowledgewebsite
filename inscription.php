@@ -60,7 +60,6 @@
             $_SESSION['connected'] = true;
             $_SESSION['pseudo'] = htmlspecialchars($_POST["nom"]);
             //header("Refresh:0; url=index.php");
-            echo $db->display();
         } else if (isset($_POST["nom"])) {
             if (empty($_POST["nom"]) || empty($_POST["email"]) || empty($_POST["password"]) || empty($_POST["age"])) {
                 echo "<p>Formulaire incomplet</p>";

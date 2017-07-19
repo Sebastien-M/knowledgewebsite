@@ -21,11 +21,21 @@ class db {
 
     function __construct() {
         $this->dbh = new PDO('mysql:host=localhost;dbname=knowledge_websitedb', 'root', 'toor');
+        $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     function new_user(Utilisateur $user) {
-        $query = $this->dbh->query("INSERT INTO users(pseudo, password, email, reg_date) " .
-                "VALUES ('" . $user->getNom() . "','" . $user->getPassword() . "','" . $user->getEmail() . "',NOW() );");
+        $pseudo = $user->getNom();
+        $email = $user->getEmail();
+        $password = $user->getPassword();
+        $date = 'NOW()';
+        $query = $this->dbh->prepare("INSERT INTO users(pseudo, password, email, reg_date) " .
+                "VALUES (:pseudo, :password, :email, :reg_date);");
+        $query->bindParam('pseudo', $pseudo);
+        $query->bindParam('password', $password);
+        $query->bindParam('email', $email);
+        $query->bindParam('reg_date', $date);
+        $query->execute();
         if (!$query) {
             echo "\nPDO::errorInfo():\n";
             print_r($this->dbh->errorInfo());
@@ -33,12 +43,24 @@ class db {
     }
 
     function newArticle(Article $cours) {
-        $query = $this->dbh->query("INSERT INTO articles (discipline, titre, contenu, auteur, creation_date) VALUES ('"
-                . $cours->getDiscipline() . "', '" . $cours->getTitre() . "', '" . $cours->getContenu() . "', '" . $cours->getAuteur() . "', NOW());");
-        if (!$query) {
-            echo "\nPDO::errorInfo():\n";
-            print_r($this->dbh->errorInfo());
-        }
+        $discipline = $cours->getDiscipline();
+        $titre = $cours->getTitre();
+        $contenu = $cours->getContenu();
+        $auteur = $cours->getAuteur();
+        $date = 'NOW()';
+        $query = $this->dbh->prepare("INSERT INTO articles (discipline, titre, contenu, auteur, creation_date) "
+                . "VALUES (:discipline,:titre, :contenu, :auteur, :creation_date);");
+        $query->bindParam('discipline', $discipline);
+        $query->bindParam('titre', $titre);
+        $query->bindParam('contenu', $contenu);
+        $query->bindParam('auteur', $auteur);
+        $query->bindParam('creation_date', $date);
+        $query->execute();
+      
+//        if (!$query) {
+//            echo "\nPDO::errorInfo():\n";
+//            print_r($this->dbh->errorInfo());
+//        }
     }
 
     function connect($user, $password) {
@@ -58,10 +80,10 @@ class db {
     function readArticles() {
         $arr = [];
         $query = $this->dbh->query("SELECT * FROM articles");
-        if (!$query) {
-            echo "\nPDO::errorInfo():\n";
-            print_r($this->dbh->errorInfo());
-        }
+//        if (!$query) {
+//            echo "\nPDO::errorInfo():\n";
+//            print_r($this->dbh->errorInfo());
+//        }
         while ($row = $query->fetch()) {
             $arr[$row['id']]["discipline"] = $row['discipline'];
             $arr[$row['id']]["titre"] = $row['titre'];
@@ -75,13 +97,18 @@ class db {
     function readSingleArticle($chosen){
         $arr = [];
         $query = $this->dbh->query("SELECT * FROM articles where titre='".$chosen."' LIMIT 1;");
-        if (!$query) {
-            echo "\nPDO::errorInfo():\n";
-            print_r($this->dbh->errorInfo());
-        }
+//        if (!$query) {
+//            echo "\nPDO::errorInfo():\n";
+//            print_r($this->dbh->errorInfo());
+//        }
         while ($row = $query->fetch()) {
+            $arr['discipline'] = $row['discipline'];
             $arr['titre'] = $row['titre'];
+            $arr['contenu'] = $row['contenu'];
+            $arr['auteur'] = $row['auteur'];
+            $arr['creation'] = $row['creation_date'];
         }
+        return $arr;
     }
 
 }

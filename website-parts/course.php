@@ -18,20 +18,18 @@
         <title>
             <?php
             //Header
-            $titre = $db->readSingleArticle($_SESSION['articleChoisi']);
-            echo $titre['titre'];
+            $article = $db->readSingleArticle($_GET['article']);
+            echo $article['discipline'];
             ?>
         </title>
     </head>
     <body>
     <xmp theme="bootswatch" style="display:none;">
-
 <?php
 //Markdown
-        echo $db->readSingleArticle($_SESSION['articleChoisi'], "titre") . "\n";
-        echo $db->readSingleArticle($_SESSION['articleChoisi'], "contenu") . "\n";
+        echo "<h1>".$article['titre'] . "</h1>";
+        echo "<p style='word-wrap: break-word;'>".$article['contenu']. "</p>";
 ?>
-
     </xmp>
     <a href="../index.php">Retour au menu</a>
     <script src="http://strapdownjs.com/v/0.2/strapdown.js"></script>
@@ -82,10 +80,10 @@
             }
         }
     }
-//    echo "<form action='' method='POST'>" .
-//    "<input type='submit' value='upvote' name='upvote'>" .
-//    "<input type='submit' value='downvote' name='downvote'>" .
-//    "</form>";
+    echo "<form action='' method='POST'>" .
+    "<input type='submit' value='upvote' name='upvote'>" .
+    "<input type='submit' value='downvote' name='downvote'>" .
+    "</form>";
     ?>
 
 </body>
