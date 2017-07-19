@@ -24,6 +24,15 @@ class db {
         //$this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
+    /**
+     * new user
+     *
+     * creates a new user
+     *
+     * @param (Class) (Utilisateur) User class
+     * @return (none) (none)
+     * 
+     */
     function new_user(Utilisateur $user) {
         $pseudo = $user->getNom();
         $email = $user->getEmail();
@@ -42,6 +51,15 @@ class db {
         }
     }
 
+    /**
+     * newArticle
+     *
+     * creates a new article
+     *
+     * @param (Class) (Article) Article Class
+     * @return (none) (none)
+     * 
+     */
     function newArticle(Article $cours) {
         $discipline = $cours->getDiscipline();
         $titre = $cours->getTitre();
@@ -61,7 +79,16 @@ class db {
 //            print_r($this->dbh->errorInfo());
 //        }
     }
-
+    
+    /**
+     * connect
+     *
+     * check if pseudo and password matches with an existing one
+     *
+     * @param (str,str) (pseudo,password) 
+     * @return (Bool) (none)
+     * 
+     */
     function connect($user, $password) {
         $verif_login = $this->dbh->query("SELECT COUNT(*) FROM users WHERE pseudo = '" . $user . "';");
         if ($verif_login->fetchColumn() == 0) {
@@ -75,7 +102,16 @@ class db {
             }
         }
     }
-
+    
+    /**
+     * readArticles
+     *
+     * display articles
+     *
+     * @param (none) (none)
+     * @return (array) (none)
+     * 
+     */
     function readArticles() {
         $arr = [];
         $query = $this->dbh->query("SELECT * FROM articles");
@@ -93,6 +129,15 @@ class db {
         return $arr;
     }
     
+    /**
+     * readSingleArticle
+     *
+     * Display content of an article
+     *
+     * @param (str) (Chosen) Title of article
+     * @return (array) (none)
+     * 
+     */
     function readSingleArticle($chosen){
         $arr = [];
         $query = $this->dbh->query("SELECT * FROM articles where titre='".$chosen."' LIMIT 1;");
