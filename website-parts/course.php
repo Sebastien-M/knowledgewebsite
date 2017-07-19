@@ -18,7 +18,8 @@
         <title>
             <?php
             //Header
-            echo $db->readSingleArticle($_SESSION['articleChoisi'], "discipline");
+            $titre = $db->readSingleArticle($_SESSION['articleChoisi']);
+            echo $titre['titre'];
             ?>
         </title>
     </head>

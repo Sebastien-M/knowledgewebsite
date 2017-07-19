@@ -71,5 +71,17 @@ class db {
         }
         return $arr;
     }
+    
+    function readSingleArticle($chosen){
+        $arr = [];
+        $query = $this->dbh->query("SELECT * FROM articles where titre='".$chosen."' LIMIT 1;");
+        if (!$query) {
+            echo "\nPDO::errorInfo():\n";
+            print_r($this->dbh->errorInfo());
+        }
+        while ($row = $query->fetch()) {
+            $arr['titre'] = $row['titre'];
+        }
+    }
 
 }
