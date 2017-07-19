@@ -21,7 +21,7 @@ class db {
 
     function __construct() {
         $this->dbh = new PDO('mysql:host=localhost;dbname=knowledge_websitedb', 'root', 'toor');
-        $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //$this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     function new_user(Utilisateur $user) {
@@ -66,7 +66,7 @@ class db {
     function connect($user, $password) {
         $verif_login = $this->dbh->query("SELECT COUNT(*) FROM users WHERE pseudo = '" . $user . "';");
         if ($verif_login->fetchColumn() == 0) {
-            //echo "Pseudo inexistant";
+            //Pseudo inexistant
         } else {
             $reponse_login = $this->dbh->query("SELECT password FROM users WHERE pseudo ='" . $user . "' LIMIT 1;");
             $donnees = $reponse_login->fetch();
