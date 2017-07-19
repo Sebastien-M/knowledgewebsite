@@ -56,7 +56,6 @@ class db {
         $query->bindParam('auteur', $auteur);
         $query->bindParam('creation_date', $date);
         $query->execute();
-      
 //        if (!$query) {
 //            echo "\nPDO::errorInfo():\n";
 //            print_r($this->dbh->errorInfo());
@@ -111,4 +110,11 @@ class db {
         return $arr;
     }
 
+    function newComment(){
+        
+    }
+    
+    function readComments(){
+        
+    }
 }
