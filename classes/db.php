@@ -37,10 +37,10 @@ class db {
     function new_user(Utilisateur $user) {
         $query = $this->dbh->prepare("INSERT INTO users (pseudo, password, email, reg_date) " .
                 "VALUES (:pseudo, :password, :email, :reg_date);");
-        $query->bindValue('pseudo', $user->getNom());
-        $query->bindValue('password', $user->getPassword());
-        $query->bindValue('email', $user->getEmail());
-        $query->bindValue('reg_date', 'NOW()');
+        $query->bindValue(':pseudo', $user->getNom());
+        $query->bindValue(':password', $user->getPassword());
+        $query->bindValue(':email', $user->getEmail());
+        $query->bindValue(':reg_date', 'NOW()');
         $query->execute();
         if (!$query) {
             echo "\nPDO::errorInfo():\n";

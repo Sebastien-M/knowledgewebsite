@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -37,7 +40,6 @@ and open the template in the editor.
         $db = new db();
         if (isset($_POST["pseudo"]) && isset($_POST["password"])) {
             if ($db->connect($_POST['pseudo'],$_POST["password"]) == TRUE) {
-                session_start();
                 $_SESSION['connected'] = true;
                 $_SESSION['pseudo'] = htmlspecialchars($_POST["pseudo"]);
                 header("Refresh:0; url=index.php");

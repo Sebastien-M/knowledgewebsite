@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE  html>
 <html lang="en">
     <head>
@@ -6,7 +9,6 @@
         <?php
         require_once '../classes/db.php';
         $db = new db();
-        session_start();
 
         //au clic sur la page article choisi = article cliqué
         if (!isset($_GET['article'])) {

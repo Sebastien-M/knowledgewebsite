@@ -19,16 +19,15 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        
         if (isset($_SESSION['connected'])) {
 
             require_once './classes/db.php';
             require_once './classes/Article.php';
             require_once './website-parts/header.php';
             ?>
-        <div class="page-header container-fluid col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3">
-            <h1 class="">Ajouter un cours</h1>
-        </div>
+            <div class="page-header container-fluid col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3">
+                <h1 class="">Ajouter un cours</h1>
+            </div>
             <div class="container-fluid">
                 <form class="row col-xs-12 col-sm-12 " action=""method="POST">
                     <div class="form-group">
@@ -51,11 +50,9 @@ and open the template in the editor.
                 $db = new db();
                 $course = new Article($_POST['categorie'], $_POST['titre'], $_POST['cours'], $_SESSION["pseudo"]);
                 $db->newArticle($course);
-            } else {
-                
             }
         } else {
-            echo '<p>Vous devez être connecté pour ajouter un cours</p>';
+            echo "<p>Vous devez être connecté pour ajouter un cours</p>";
             echo "<a href='index.php'>Retour</a>";
         }
         ?>

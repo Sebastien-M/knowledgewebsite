@@ -52,18 +52,17 @@ session_start();
             include_once 'classes/Utilisateur.php';
             include_once 'classes/db.php';
             $db = new db();
-
-
-            if (!empty($_POST["nom"]) || !empty($_POST["email"]) || !empty($_POST["password"]) || !empty($_POST["age"])) {
-                $utilisateur = new Utilisateur(htmlspecialchars($_POST["nom"]), htmlspecialchars($_POST["email"]), htmlspecialchars($_POST["avatar"]), htmlspecialchars($_POST["bio"]), htmlspecialchars($_POST["age"]));
-                $utilisateur->setPassword(password_hash($_POST["password"], PASSWORD_BCRYPT));
+            $post = filter_input_array(INPUT_POST,FILTER_SANITIZE_STRING);
+            if (!empty($post["nom"]) || !empty($post["email"]) || !empty($post["password"]) || !empty($post["age"])) {
+                $utilisateur = new Utilisateur(htmlspecialchars($post["nom"]), htmlspecialchars($post["email"]), htmlspecialchars($post["avatar"]), htmlspecialchars($post["bio"]), htmlspecialchars($post["age"]));
+                $utilisateur->setPassword(password_hash($post["password"], PASSWORD_BCRYPT));
                 $db->new_user($utilisateur);
                 $_SESSION['user'] = $utilisateur;
                 $_SESSION['connected'] = true;
-                $_SESSION['pseudo'] = htmlspecialchars($_POST["nom"]);
+                $_SESSION['pseudo'] = htmlspecialchars($post["nom"]);
                 //header("Refresh:0; url=index.php");
-            } else if (isset($_POST["nom"])) {
-                if (empty($_POST["nom"]) || empty($_POST["email"]) || empty($_POST["password"]) || empty($_POST["age"])) {
+            } else if (isset($post["nom"])) {
+                if (empty($post["nom"]) || empty($post["email"]) || empty($post["password"]) || empty($post["age"])) {
                     echo "<p>Formulaire incomplet</p>";
                 }
             }
