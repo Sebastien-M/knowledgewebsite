@@ -33,17 +33,14 @@ class db {
      * @return (none) (none)
      * 
      */
+    
     function new_user(Utilisateur $user) {
-        $pseudo = $user->getNom();
-        $email = $user->getEmail();
-        $password = $user->getPassword();
-        $date = 'NOW()';
-        $query = $this->dbh->prepare("INSERT INTO users(pseudo, password, email, reg_date) " .
+        $query = $this->dbh->prepare("INSERT INTO users (pseudo, password, email, reg_date) " .
                 "VALUES (:pseudo, :password, :email, :reg_date);");
-        $query->bindParam('pseudo', $pseudo);
-        $query->bindParam('password', $password);
-        $query->bindParam('email', $email);
-        $query->bindParam('reg_date', $date);
+        $query->bindValue('pseudo', $user->getNom());
+        $query->bindValue('password', $user->getPassword());
+        $query->bindValue('email', $user->getEmail());
+        $query->bindValue('reg_date', 'NOW()');
         $query->execute();
         if (!$query) {
             echo "\nPDO::errorInfo():\n";
@@ -61,18 +58,13 @@ class db {
      * 
      */
     function newArticle(Article $cours) {
-        $discipline = $cours->getDiscipline();
-        $titre = $cours->getTitre();
-        $contenu = $cours->getContenu();
-        $auteur = $cours->getAuteur();
-        $date = 'NOW()';
         $query = $this->dbh->prepare("INSERT INTO articles (discipline, titre, contenu, auteur, creation_date) "
                 . "VALUES (:discipline,:titre, :contenu, :auteur, :creation_date);");
-        $query->bindParam('discipline', $discipline);
-        $query->bindParam('titre', $titre);
-        $query->bindParam('contenu', $contenu);
-        $query->bindParam('auteur', $auteur);
-        $query->bindParam('creation_date', $date);
+        $query->bindValue('discipline', $cours->getDiscipline());
+        $query->bindValue('titre', $cours->getTitre());
+        $query->bindValue('contenu', $cours->getContenu());
+        $query->bindValue('auteur', $cours->getAuteur());
+        $query->bindValue('creation_date', 'NOW()');
         $query->execute();
 //        if (!$query) {
 //            echo "\nPDO::errorInfo():\n";
